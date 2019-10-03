@@ -20,13 +20,13 @@ private int p;
 
 public class ListElement {
 	private ListElement next;
-	/*private ListElement previous;*//*for our doubly linked later*/
+	private ListElement previous;         /*for our doubly linked*/
 	private int data;
 
 	public ListElement(){
 		this.data = 0;
 		this.next = null;		/*just our constructor */
-		/*this.previous = null;*/	/*for our later double link */		
+		this.previous = null;	/*for our later double link */		
 	}
 
 	public void setData(int data){		/*sets the value of an element's data */
@@ -51,7 +51,8 @@ public class ListElement {
 			tail = head;
        		 } else {
                 tail.next = temp;			/* else, our value becomes the new tail */
-                tail = temp;
+                temp.previous = tail;
+		 tail = temp;
             }
         
         length++;
@@ -59,11 +60,11 @@ public class ListElement {
 
 public void getElement(int pos) 
 	{
-		ListElement temp = head;
+		ListElement temp = tail;
 		p=0;
 		while(p != pos && p<length)
 		{
-		temp = temp.next;			/* traverse list until we reach the element */
+		temp = temp.previous;			/* traverse list until we reach the element */
 		p++;
 		}
 
@@ -84,12 +85,12 @@ public void getElement(int pos)
 	}
 public void deleteElement(int pos) 
 	{
-		ListElement temp = head;
+		ListElement temp = tail;
 		ListElement temp2;
 		p=0;
 		while(p != pos-1 && p<length && pos != 0)
 		{
-		temp = temp.next;				/*should stop one element before the intended */
+		temp = temp.previous;				/*should stop one element before the intended */
 		p++;
 		}
 
@@ -97,25 +98,26 @@ public void deleteElement(int pos)
 		{
 		System.out.println("Sorry, but this position is beyond the list size"+ "\n"); /*error check for too large input */
 		}
-		else if(pos == 0)				/*if the user wants to delete the head*/
+		else if(pos == 0)				/*if the user wants to delete the tail*/
 		{
-		head = temp.next;
+		tail = temp.previous;
 		length--;
 		System.out.println("Element Deleted"+ "\n");	
-
+	
 		}
-		else if(p == length-2)				/*if the user wants to delete the tail */
+		else if(p == length-2)				/*if the user wants to delete the head */
 		{
-			tail = temp;
-			temp.next = null;
+			head = temp;
+			temp.previous = null;
 			System.out.println("Element Deleted"+ "\n");	
 		length--;	
 		}
 		else if(p == pos-1)				/*if the user wants to delete an element (not head/tail) */
 		{
 			
-		temp2 = temp.next;
-		temp.next = temp2.next;
+		temp2 = temp.previous;
+		temp.previous = temp2.previous;
+		temp.previous.next = temp.previous;
 		length--;
 		System.out.println("Element Deleted" + "\n");	
 
@@ -134,14 +136,14 @@ public void deleteElement(int pos)
 
 
 
- public void printLinkedListHead() 
+ public void printLinkedListTail() 
     { 
 	if (length != 0)
 	{
-        ListElement temp = head; 
+        ListElement temp = tail; 
         while (temp  != null) { 
-            System.out.print(temp .getData()+ " "); 	/*starting from head, we move down the list displaying its contents*/
-           temp  = temp.next; 
+            System.out.print(temp .getData()+ " "); 	/*starting from tail, we move down the list displaying its contents*/
+           temp  = temp.previous; 
         } 
 	}else
 	{
@@ -153,7 +155,7 @@ public void deleteElement(int pos)
     { 
         ListElement n = head; 
         while (n != null) { 
-            System.out.print(n.getData()+ " "); 	plaseholder for printing list from tail-head
+            System.out.print(n.getData()+ " "); 	plaseholder for printing list from head-tail
             n = n.next; 
         } 
     } 

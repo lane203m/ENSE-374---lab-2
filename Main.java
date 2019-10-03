@@ -41,8 +41,8 @@ public static void main(String[] args) 			/* main fxn */
 	}
   	choice = 0;					/*sets to 0. Upon each loop, user will not have to re-enter their list data */
 	System.out.println("_________________________________________________________________________"+"\n");
-        System.out.println("Displaying Linked List Head-Tail:");
-        llist.printLinkedListHead(); 			/*above displays list and contains some __ for easier reading */
+        System.out.println("Displaying Linked List Tail-Head:");
+        llist.printLinkedListTail(); 			
 							/*below allows user to retrieve, delete or quit */
 	System.out.println("\n" + "\n" + "Delete value = 3, Retrieve value = 2, Quit? 1=yes, 0=No:");
 	quit = in.nextInt();
@@ -50,7 +50,7 @@ public static void main(String[] args) 			/* main fxn */
 
 	if(quit == 3)					/*if deleting, we do the following */
 	{
-	System.out.println("\n"+"please enter the numerical position (head=0) of the member you wish to delete");
+	System.out.println("\n"+"please enter the numerical position (tail=0) of the member you wish to delete");
 	pos = in.nextInt();
 	
 	llist.deleteElement(pos);
@@ -58,7 +58,7 @@ public static void main(String[] args) 			/* main fxn */
 	}
 	else if(quit == 2)				/*if retrieving, we do the following */
 	{
-	System.out.println("\n"+"please enter the numerical position (head=0) of the member you wish to retrieve");
+	System.out.println("\n"+"please enter the numerical position (tail=0) of the member you wish to retrieve");
 	pos = in.nextInt();
 	
 	llist.getElement(pos);
